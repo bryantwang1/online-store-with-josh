@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router'; //contains information
 import { Location } from '@angular/common'; //normalize URLs when traveling between routes, especially dynamic ones.
 import { Album } from '../album.model';
 import { AlbumService } from '../album.service';
+import { FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
   selector: 'app-album-detail',
@@ -11,8 +12,8 @@ import { AlbumService } from '../album.service';
   providers: [AlbumService]
 })
 export class AlbumDetailComponent implements OnInit {
-  albumId: number = null;//created and will be filled later
-  albumToDisplay: Album;
+  albumId: string;//created and will be filled later
+  albumToDisplay: FirebaseObjectObservable<Album>;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,7 +22,7 @@ export class AlbumDetailComponent implements OnInit {
 
   ngOnInit() {// is a component lifecycle hook. //Any code we place here will run when a component is initialized (that is, after constructor() creates it).
     this.route.params.forEach((urlParametersArray) => {//this.route uses ActivatedRoute, uses params to retrieve any parameters from goToDetailPage method//Loops through each temporarly assigning each paramater to urlParametersArray.
-       this.albumId = parseInt(urlParametersArray['id']); //retrieves the number with the key Id. this matches the route's path, and assigns to albumId
+       this.albumId = urlParametersArray['id']; //retrieves the number with the key Id. this matches the route's path, and assigns to albumId
      }); // => is a Fat arrow that basically is a short hand function. it keeps the value of "This"
      this.albumToDisplay = this.albumService.getAlbumById(this.albumId);//gets single id gets single album via service and assigns to album to display.
    }
