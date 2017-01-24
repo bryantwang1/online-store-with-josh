@@ -1,3 +1,17 @@
+# FireBase setup
+
+  create app/api-keys.ts
+
+    ```
+    export var masterFirebaseConfig = {
+        apiKey: "xxxx",
+        authDomain: "xxxx.firebaseapp.com",
+        databaseURL: "https://xxxx.firebaseio.com",
+        storageBucket: "xxxx.appspot.com",
+        messagingSenderId: "xxxx"
+      };
+    ```
+
 # OnlineStore
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.26.
